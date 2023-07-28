@@ -6,6 +6,8 @@ qty = int(input(f"How many of item {product_desc} are being purchased? "))
 
 #Original price as float number
 price= float(input("What is the regular price? "))
+
+#needed numbers for discounts and tax
 a = 100
 b = 15 
 c = 25
