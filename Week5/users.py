@@ -89,7 +89,7 @@ class AuthorizedUsers():
     
 
 def getData(nat):
-    URL = "https://randomuser.me/api/?results=10"+nat+".json"
+    URL = "https://randomuser.me/api/?results=10&nat="+nat
 
     try:
         response = requests.get(URL, timeout=5)
@@ -109,10 +109,16 @@ myUserList = AuthorizedUsers()
 jsonUserData = getData("us")
 
 for currentUser in jsonUserData["results"]:
-    userFirst = currentUser["name"]
-    email = currentUser["email"]
-    users = []
-    newUser = User(userFirst, email)
+    newUser = User(currentUser["name"]["first"],
+                   currentUser["name"]['last'],
+                   currentUser["email"],
+                   currentUser["login"]["uuid"],
+                   currentUser["login"]["username"],
+                   currentUser["login"]["password"],
+                   currentUser["phone"],
+                   currentUser["cell"],
+                   currentUser["picture"]["large"],
+                   currentUser["picture"]["thumbnail"])
     myUserList.addUser(newUser)
     
 myUserList.showUserList()
